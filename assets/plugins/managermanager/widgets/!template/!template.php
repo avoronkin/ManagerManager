@@ -6,7 +6,7 @@
 //--------------------------------------------------------------------------------- 
 function mm_widget_template($fields, $other_param='defaultValue', $roles='', $templates='') {
 	
-	global $modx, $content, $mm_fields;
+	global $modx, $content, $mm_fields, $mm_url;
 	$e = &$modx->Event;
 	
 	if (useThisRule($roles, $templates)) {
@@ -42,8 +42,8 @@ function mm_widget_template($fields, $other_param='defaultValue', $roles='', $te
 		
 		// We have functions to include JS or CSS external files you might need
 		// The standard ModX API methods don't work here
-		$output .= includeJs('/assets/plugins/managermanager/widgets/template/javascript.js');
-		$output .= includeCss('/assets/plugins/managermanager/widgets/template/styles.css');
+		$output .= includeJs($mm_url . 'widgets/template/javascript.js');
+		$output .= includeCss($mm_url . 'widgets/template/styles.css');
 		
 				
 		// Do something for each of the fields supplied

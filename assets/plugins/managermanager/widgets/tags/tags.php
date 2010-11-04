@@ -6,7 +6,7 @@
 //---------------------------------------------------------------------------------
 function mm_widget_tags($fields, $delimiter=',', $source='', $display_count=false, $roles='', $templates='') {
 
-	global $modx, $content, $mm_fields;
+	global $modx, $content, $mm_fields, $mm_url;
 	$e = &$modx->Event;
 
 	if (useThisRule($roles, $templates)) {
@@ -43,9 +43,9 @@ function mm_widget_tags($fields, $delimiter=',', $source='', $display_count=fals
 		
 
 		// Insert some JS  and a style sheet into the head
-		$output .= "//  -------------- Tag widget include ------------- \n";
-		$output .= includeJs($modx->config['base_url'] .'assets/plugins/managermanager/widgets/tags/tags.js');
-		$output .= includeCss($modx->config['base_url'] .'assets/plugins/managermanager/widgets/tags/tags.css');
+		$output .= "//  -------------- Tag widget include ".$mm_url."------------- \n";
+		$output .= includeJs($mm_url . 'widgets/tags/tags.js');
+		$output .= includeCss($mm_url . 'widgets/tags/tags.css');
 
 
 		// Go through each of the fields supplied

@@ -52,7 +52,7 @@ $remove_deprecated_tv_types = ($remove_deprecated_tv_types_pref == 'yes') ? true
 $ignore_first_chars = array('.', '_', '!'); 
 
 // Include functions - we'll load all *.inc.php files in the "functions" folder
-$function_dir = $modx->config['base_path'] . 'assets/plugins/managermanager/functions';
+$function_dir = $mm_path . 'functions';
 if ($handle = opendir($function_dir)) {
     while (false !== ($file = readdir($handle))) {
         if (!in_array(substr($file, 0, 1), $ignore_first_chars) && $file != ".." && substr($file, -8) == '.inc.php') {
@@ -66,7 +66,7 @@ if ($handle = opendir($function_dir)) {
 // Include widgets
 // We look for a PHP file with the same name as the directory - e.g.
 // /widgets/widgetname/widgetname.php
-$widget_dir = $modx->config['base_path'] . 'assets/plugins/managermanager/widgets';
+$widget_dir = $mm_path . 'widgets';
 if ($handle = opendir($widget_dir)) {
     while (false !== ($file = readdir($handle))) {
         if (!in_array(substr($file, 0, 1), $ignore_first_chars)  && $file != ".."  && is_dir($widget_dir.'/'.$file)) {
@@ -169,7 +169,7 @@ if (!function_exists("make_changes")) {
 	function make_changes($chunk) { 
 	
 		global $modx;	// Global modx object
-		$config_file = $modx->config['base_path'] . 'assets/plugins/managermanager/mm_rules.inc.php';
+		$config_file = $mm_path . 'mm_rules.inc.php';
 		
 		// See if there is any chunk output (e.g. it exists, and is not empty)
 		$chunk_output = $modx->getChunk($chunk);
@@ -358,7 +358,7 @@ $j(document).ready(function() {
   	
 	
 	// Where would we get the config file from?
-	$config_file = $modx->config['base_path'] . 'assets/plugins/managermanager/mm_rules.inc.php';
+	$config_file = $mm_path . 'mm_rules.inc.php';
 		
 	// See if there is any chunk output (e.g. it exists, and is not empty)
 	$chunk_output = $modx->getChunk($config_chunk);

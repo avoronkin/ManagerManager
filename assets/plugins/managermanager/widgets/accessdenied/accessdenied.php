@@ -8,7 +8,7 @@
 //--------------------------------------------------------------------------------- 
 function mm_widget_accessdenied($ids='', $message='',  $roles='') {
 	
-	global $modx, $content;
+	global $modx, $content, $mm_url;
 	$e = &$modx->Event;
 	
 	if (empty($message))  $message='<span>Access denied</span>Access to current document closed for security reasons.';
@@ -23,7 +23,7 @@ function mm_widget_accessdenied($ids='', $message='',  $roles='') {
 		
 		if (in_array($docid, $ids)) 
 		{
-			$output .= includeCss($modx->config['base_url'] . 'assets/plugins/managermanager/widgets/accessdenied/accessdenied.css'); 
+			$output .= includeCss($mm_url . 'widgets/accessdenied/accessdenied.css');
 			
 			$output .= '
 			$j("input, div, form[name=mutate]").remove(); // Remove all content from the page

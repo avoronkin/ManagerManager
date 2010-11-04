@@ -6,7 +6,7 @@
 // Adds a color selection widget to the specified TVs
 //--------------------------------------------------------------------------------- 
 function mm_widget_colors($fields, $default='#ffffff', $roles='', $templates='') {
-	global $modx, $content, $mm_fields;
+	global $modx, $content, $mm_fields, $mm_url;
 	$e = &$modx->Event;
 	
 	if (useThisRule($roles, $templates)) {
@@ -33,10 +33,10 @@ function mm_widget_colors($fields, $default='#ffffff', $roles='', $templates='')
 		}
 	
 		// Insert some JS 
-		$output .= includeJs($modx->config['base_url'] .'assets/plugins/managermanager/widgets/colors/farbtastic.js');
+		$output .= includeJs($mm_url .'widgets/colors/farbtastic.js');
 		
 		// Insert some CSS 
-		$output .= includeCss($modx->config['base_url'] .'assets/plugins/managermanager/widgets/colors/farbtastic.css');
+		$output .= includeCss($mm_url .'widgets/colors/farbtastic.css');
 			
 		// Go through each of the fields supplied
 		foreach ($fields as $tv) {
