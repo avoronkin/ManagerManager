@@ -79,7 +79,7 @@ if ($handle = opendir($widget_dir)) {
 
 
 // Set variables
-global $content,$default_template, $mm_current_page, $mm_fields;
+global $content,$default_template, $mm_current_page, $mm_fields, $mm_top_menu;
 $mm_current_page = array();
 $mm_current_page['template'] = isset($_POST['template']) ? $_POST['template'] : isset($content['template']) ? $content['template'] : $default_template;
 $mm_current_page['role'] = $_SESSION['mgrRole'];
@@ -116,7 +116,40 @@ $mm_fields = array(
 	'which_editor' => array('fieldtype'=>'select', 'fieldname'=>'which_editor','dbname'=>'',  'tv'=>false),
 	'resource_type' => array('fieldtype'=>'select', 'fieldname'=>'type', 'dbname'=>'isfolder', 'tv'=>false),
 	'weblink' => array('fieldtype'=>'input', 'fieldname'=>'ta', 'dbname'=>'content', 'tv'=>false)
-);				
+);
+
+$mm_top_menu = array(
+        'site'=>array('id'=>'#limenu3','href'=>'//#menu3'),
+        'elements'=>array('id'=>'#limenu5','href'=>'//#menu5'),
+        'modules'=>array('id'=>'#limenu9','href'=>'//#menu9'),
+        'security'=>array('id'=>'#limenu2','href'=>'//#menu2'),
+        'tools'=>array('id'=>'#limenu1-1','href'=>'menu1-1'),
+        'reports'=>array('id'=>'#limenu1-2','href'=>'menu1-2'),
+        'home'=>array('href'=>'index.php?a=2'),
+        'preview'=>array('href'=>'../'),
+        'clear cache'=>array('href'=>'index.php?a=26'),
+        'search'=>array('href'=>'index.php?a=71'),
+        'new resource'=>array('href'=>'index.php?a=4'),
+        'new weblink'=>array('href'=>'index.php?a=72'),
+        'manage elements'=>array('href'=>'index.php?a=76'),
+        'manage files'=>array('href'=>'index.php?a=31'),
+        'manage modules'=>array('href'=>'index.php?a=106'),
+        'manager users'=>array('href'=>'index.php?a=75'),
+        'web users'=>array('href'=>'index.php?a=99'),
+        'roles'=>array('href'=>'index.php?a=86'),
+        'manager permissions'=>array('href'=>'index.php?a=40'),
+        'web permissions'=>array('href'=>'index.php?a=91'),
+        'backup'=>array('href'=>'index.php?a=93'),
+        'backup'=>array('href'=>'index.php?a=93'),
+        'remove locks'=>array('href'=>'javascript:removeLocks();'),
+        'import html'=>array('href'=>'index.php?a=95'),
+        'export html'=>array('href'=>'index.php?a=83'),
+        'configuration'=>array('href'=>'index.php?a=17'),
+        'shedule'=>array('href'=>'index.php?a=70'),
+        'system events'=>array('href'=>'index.php?a=114'),
+        'manager actions'=>array('href'=>'index.php?a=13'),
+        'system info'=>array('href'=>'index.php?a=53')
+);
 
 
 // Add in TVs to the list of available fields
@@ -451,8 +484,62 @@ case 'OnTVFormRender':
 	}
 
 break;
+//MODx manager top menu
+case 'OnManagerPageInit':
+    if($_REQUEST['f'] == 'menu') {
+       echo includeJs($js_url, 'html');
+       echo '
+<!-- ManagerManager Plugin :: '.$mm_version.':: Top menu start -->
 
+<!-- You are logged into the following role: '. $mm_current_page['role'] .' -->
+<style type="text/css">
+/*hide top menu*/
+#topMenu{
+display:none;
+}
+</style>
+<script type="text/javascript" charset="'.$modx->config['modx_charset'].'">
+var $j = jQuery.noConflict();
+function larry( index, length ){
+		if( ( index = parseInt( index ) ) != 0 ){
+				index = index < 0 ? length + index : index - 1;
+				}
+				return index < 0 ? 0 : index > length ? length - 1 : index;
+		}
+        
+$j(document).ready(function() {
 
+';
+         // Where would we get the config file from?
+        $config_file = $mm_path . 'mm_topmenu_rules.inc.php';
+
+        // See if there is any chunk output (e.g. it exists, and is not empty)
+        $chunk_output = $modx->getChunk($topmenu_config_chunk);
+        if (!empty($chunk_output)) {
+            echo "// Getting rules from chunk: $topmenu_config_chunk \n\n";
+            
+            eval($chunk_output); // If there is, run it.
+        } else if (is_readable($config_file)) {	// If there's no chunk output, read in the file.
+            echo "// Getting rules from file: $config_file \n\n";
+            include($config_file);
+        } else {
+           echo "// No rules found \n\n";
+        }
+
+       echo '
+           //set first tab active
+           $j("#nav").children("li").removeClass("active").filter(":first").addClass("active");
+           //show top menu
+           $j("#topMenu").css("display","block").hide().fadeIn(400);
+          
+    });
+    </script>
+<!-- ManagerManager Plugin :: Top menu :: End -->
+';
+
+    }
+
+    break;
 
 } // end switch
 
