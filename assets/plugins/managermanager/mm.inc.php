@@ -79,7 +79,7 @@ if ($handle = opendir($widget_dir)) {
 
 
 // Set variables
-global $content,$default_template, $mm_current_page, $mm_fields, $mm_top_menu;
+global $content,$default_template, $mm_current_page, $mm_fields;
 $mm_current_page = array();
 $mm_current_page['template'] = isset($_POST['template']) ? $_POST['template'] : isset($content['template']) ? $content['template'] : $default_template;
 $mm_current_page['role'] = $_SESSION['mgrRole'];
@@ -118,38 +118,6 @@ $mm_fields = array(
 	'weblink' => array('fieldtype'=>'input', 'fieldname'=>'ta', 'dbname'=>'content', 'tv'=>false)
 );
 
-$mm_top_menu = array(
-        'site'=>array('id'=>'#limenu3','href'=>'//#menu3'),
-        'elements'=>array('id'=>'#limenu5','href'=>'//#menu5'),
-        'modules'=>array('id'=>'#limenu9','href'=>'//#menu9'),
-        'security'=>array('id'=>'#limenu2','href'=>'//#menu2'),
-        'tools'=>array('id'=>'#limenu1-1','href'=>'menu1-1'),
-        'reports'=>array('id'=>'#limenu1-2','href'=>'menu1-2'),
-        'home'=>array('href'=>'index.php?a=2'),
-        'preview'=>array('href'=>'../'),
-        'clear cache'=>array('href'=>'index.php?a=26'),
-        'search'=>array('href'=>'index.php?a=71'),
-        'new resource'=>array('href'=>'index.php?a=4'),
-        'new weblink'=>array('href'=>'index.php?a=72'),
-        'manage elements'=>array('href'=>'index.php?a=76'),
-        'manage files'=>array('href'=>'index.php?a=31'),
-        'manage modules'=>array('href'=>'index.php?a=106'),
-        'manager users'=>array('href'=>'index.php?a=75'),
-        'web users'=>array('href'=>'index.php?a=99'),
-        'roles'=>array('href'=>'index.php?a=86'),
-        'manager permissions'=>array('href'=>'index.php?a=40'),
-        'web permissions'=>array('href'=>'index.php?a=91'),
-        'backup'=>array('href'=>'index.php?a=93'),
-        'backup'=>array('href'=>'index.php?a=93'),
-        'remove locks'=>array('href'=>'javascript:removeLocks();'),
-        'import html'=>array('href'=>'index.php?a=95'),
-        'export html'=>array('href'=>'index.php?a=83'),
-        'configuration'=>array('href'=>'index.php?a=17'),
-        'shedule'=>array('href'=>'index.php?a=70'),
-        'system events'=>array('href'=>'index.php?a=114'),
-        'manager actions'=>array('href'=>'index.php?a=13'),
-        'system info'=>array('href'=>'index.php?a=53')
-);
 
 
 // Add in TVs to the list of available fields
