@@ -1,7 +1,7 @@
 <?php
 
 global $mm_top_menu,$mm_debug;
-$mm_debug = true;//debug?
+$mm_debug = false;//debug?
 $mm_top_menu = array(
         'site'=>array('id'=>'#limenu3','href'=>'#menu3'),
         'home'=>array('href'=>'index.php?a=2'),
